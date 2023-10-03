@@ -28,7 +28,7 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
-#include "examplechip_hal.h"
+#include "eaglex_hal.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

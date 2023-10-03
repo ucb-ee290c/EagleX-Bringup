@@ -29,30 +29,52 @@ cd into `workspace`
 make
 ```
 
-# Chipyard Baremetal IDE
 
-#### Compile for simulation
+# Running programs
 
-```bash
-make build USE_HTIF=1
-```
-
-#### Generate binary
-
-```bash
-make bin
-```
-
-#### Debug the SoC
+## Step 1: boot
 
 Terminal 1
-
 ```bash
-openocd.exe -f ./examplechip.cfg
+openocd -f ./bsp/eaglex/debug/eaglex_boot.cfg
 ```
 
 Terminal 2
-
 ```bash
-riscv64-unknown-elf-gdb.exe --eval-command="target extended-remote localhost:3333"
+riscv64-unknown-elf-gdb.exe --eval-command="target extended-remote localhost:3020"
+
+(gdb) load
+(gdb) c
 ```
+
+## Step 2: run
+
+Terminal 1
+```bash
+openocd -f ./bsp/eaglex/debug/eaglex_demo.cfg
+```
+
+Terminal 2
+```bash
+riscv64-unknown-elf-gdb.exe --eval-command="target extended-remote localhost:3020"
+
+(gdb) c
+```
+
+Terminal 3
+```bash
+riscv64-unknown-elf-gdb ./build/firmware.elf --eval-command="target extended-remote localhost:3000"
+
+(gdb) set $pc=0x50000000
+(gdb) c
+```
+
+Terminal 4
+```bash
+riscv64-unknown-elf-gdb ./build/firmware.elf --eval-command="target extended-remote localhost:3001"
+
+(gdb) set $pc=0x50000000
+(gdb) c
+```
+
+...

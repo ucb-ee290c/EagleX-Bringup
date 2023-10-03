@@ -18,6 +18,23 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#define HART_DATA_BASE 0x5000FFF0
+
+typedef struct {
+  __IO uint32_t hart_0;
+  __IO uint32_t hart_1;
+  __IO uint32_t hart_2;
+  __IO uint32_t hart_3;
+} HART_DATA_TypeDef;
+
+enum {
+  IDLE = 0,
+  DISPATCHED = 1,
+  RUNNING = 2,
+  DONE = 6,
+};
+
+#define HART_DATA ((HART_DATA_TypeDef *) HART_DATA_BASE)
 
 /* USER CODE END Includes */
 
@@ -76,13 +93,6 @@ int main(int argc, char **argv) {
   /* Initialize all configured peripherals */
   /* USER CODE BEGIN 2 */
 
-  // set up GPIO registers
-  GPIO_InitTypeDef GPIO_init_config;
-  GPIO_init_config.mode = GPIO_MODE_OUTPUT;
-  GPIO_init_config.pull = GPIO_PULL_NONE;
-  GPIO_init_config.drive_strength = GPIO_DS_STRONG;
-  HAL_GPIO_init(GPIOA, &GPIO_init_config, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3);
-
   // set up UART registers
   UART_InitTypeDef UART_init_config;
   UART_init_config.baudrate = 115200;
@@ -90,14 +100,55 @@ int main(int argc, char **argv) {
   UART_init_config.stopbits = UART_STOPBITS_2;
   HAL_UART_init(UART0, &UART_init_config);
 
+  uint8_t mhartid = READ_CSR("mhartid");
+
+  if (mhartid == 20) {
+    printf("hart 20 booting up others...\n");
+
+    HART_DATA->hart_0 = IDLE;
+    HART_DATA->hart_1 = IDLE;
+    HART_DATA->hart_2 = IDLE;
+    HART_DATA->hart_3 = IDLE;
+    
+    // boot 0-1
+    RCC->CLUSTER_CLKSEL = 0b000100100100100100100100100100101;
+    RCC->CLUSTER_RESETS = 0x000003FE;
+
+    // boot all
+    // RCC->CLUSTER_CLKSEL = 0b000101101101101101101101101101101;
+    // RCC->CLUSTER_RESETS = 0x00000000;
+  }
+  else {
+    while (1) {
+      printf("i shouldnt be here :((\n");
+    }
+  }
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1) {
-    uint64_t mhartid = READ_CSR("mhartid");
-    printf("Hello world from hart %d: %d\n", mhartid, counter);
+    if (HART_DATA->hart_0 == IDLE) {
+      HART_DATA->hart_0 = DISPATCHED;
+      printf("hart 0 is running\n");
+    }
+    if (HART_DATA->hart_0 == DONE) {
+      printf("hart 0 is done\n");
+      HART_DATA->hart_0 = IDLE;
+    }
+    if (HART_DATA->hart_1 == IDLE) {
+      HART_DATA->hart_1 = DISPATCHED;
+      printf("hart 1 is running\n");
+    }
+    if (HART_DATA->hart_1 == DONE) {
+      printf("hart 1 is done\n");
+      HART_DATA->hart_1 = IDLE;
+    }
+    printf("hart status: (%d, %d, %d, %d)\n", HART_DATA->hart_0, HART_DATA->hart_1, HART_DATA->hart_2, HART_DATA->hart_3);
     counter += 1;
+    
+    HAL_delay(200);
     /* USER CODE END WHILE */
   }
   /* USER CODE BEGIN 3 */
@@ -112,6 +163,24 @@ int main(int argc, char **argv) {
  */
 void __attribute__((weak, noreturn)) __main(void) {
   while (1) {
-   asm volatile ("wfi");
+    uint8_t mhartid = READ_CSR("mhartid");
+    if (mhartid == 0) {
+      while (HART_DATA->hart_0 != DISPATCHED) {
+        // wait for hart 0 to boot
+        HAL_delay(100);
+      }
+      HART_DATA->hart_0 = RUNNING;
+      HAL_delay(1000);
+      HART_DATA->hart_0 = DONE;
+    }
+    if (mhartid == 1) {
+      while (HART_DATA->hart_1 != DISPATCHED) {
+        // wait for hart 0 to boot
+        HAL_delay(100);
+      }
+      HART_DATA->hart_1 = RUNNING;
+      HAL_delay(1000);
+      HART_DATA->hart_1 = DONE;
+    }
   }
 }
