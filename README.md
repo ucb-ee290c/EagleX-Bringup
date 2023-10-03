@@ -1,17 +1,35 @@
-# Chipyard Baremetal IDE
+# EagleX Bringup
 
-## Setup
+[EagleX Test Note](https://docs.google.com/presentation/d/1NFBMX0InoTdFPE7k63EsRdLQBOzjHwr1ZK8_0qCyUlE/edit?usp=sharing)
 
-Follow the tutorial [here](https://ucb-ee290c.github.io/tutorials/software/setting-up-riscv-environment) to set up RISC-V development environment.
+## Bench Settings
 
-## Initial Repository Setup
+Using vcu118, plugin EagleX board to the 400 pin FMC connector (the narrower one).
 
-After cloning the repo, we need to initialize the submodules by executing the following commands.
+Provide 0.8V power to the chip through the Banananana connector. Chip should draw ~0.3 A current when running.
+
+Provide 100 MHz clock through the clock generator. The clock mapping is as below:
+
+| CLKSEL[0] | CLKSEL[1] | Clock                                                          |
+| --------- | --------- | -------------------------------------------------------------- |
+| 0         | 0         | using PLL                                                      |
+| 1         | 0         | using 1.8V single ended CCLK0 (on PCB the silkscreen is CCLK2) |
+| 0         | 1         | using 1.8V single ended CCLK1 (on PCB the silkscreen is CCLK1) |
+| 1         | 1         | using 1.8V single ended FMC clock CCLK2                        |
+
+## vcu118 Hack
+
+the original linux thing does not support UART passthrough, so here we are not using the RISC-V soft core on FPGA. Instead, the bitstream is a simple passthrough, which redirects the JTAG and UART signals from the DUT FMC connector to PMOD header.
+
+## Compiling program
+
+cd into `workspace`
 
 ```bash
-git submodule init
-git submodule update
+make
 ```
+
+# Chipyard Baremetal IDE
 
 #### Compile for simulation
 
