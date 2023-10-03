@@ -1,0 +1,594 @@
+{
+    "0.8": {
+        "100000000": {
+            "is_working": 1,
+            "voltage": 0.8,
+            "current": 0.23,
+            "power": 0.18
+        },
+        "200000000": {
+            "is_working": 1,
+            "voltage": 0.8,
+            "current": 0.28,
+            "power": 0.22
+        },
+        "300000000": {
+            "is_working": 1,
+            "voltage": 0.8,
+            "current": 0.35,
+            "power": 0.28
+        },
+        "400000000": {
+            "is_working": 1,
+            "voltage": 0.8,
+            "current": 0.3,
+            "power": 0.24
+        },
+        "500000000": {
+            "is_working": 1,
+            "voltage": 0.8,
+            "current": 0.33,
+            "power": 0.26
+        },
+        "600000000": {
+            "is_working": 0,
+            "voltage": 0.8,
+            "current": 0.36,
+            "power": 0.29
+        },
+        "700000000": {
+            "is_working": 0,
+            "voltage": 0.8,
+            "current": 0.38,
+            "power": 0.3
+        },
+        "800000000": {
+            "is_working": 0,
+            "voltage": 0.8,
+            "current": 0.32,
+            "power": 0.26
+        },
+        "900000000": {
+            "is_working": 0,
+            "voltage": 0.8,
+            "current": 0.33,
+            "power": 0.26
+        },
+        "1000000000": {
+            "is_working": 0,
+            "voltage": 0.8,
+            "current": 0.32,
+            "power": 0.26
+        },
+        "1100000000": {
+            "is_working": 0,
+            "voltage": 0.8,
+            "current": 0.33,
+            "power": 0.26
+        },
+        "1200000000": {
+            "is_working": 0,
+            "voltage": 0.8,
+            "current": 0.34,
+            "power": 0.26
+        }
+    },
+    "0.9": {
+        "100000000": {
+            "is_working": 1,
+            "voltage": 0.9,
+            "current": 0.26,
+            "power": 0.23
+        },
+        "200000000": {
+            "is_working": 1,
+            "voltage": 0.9,
+            "current": 0.34,
+            "power": 0.31
+        },
+        "300000000": {
+            "is_working": 1,
+            "voltage": 0.9,
+            "current": 0.39,
+            "power": 0.35
+        },
+        "400000000": {
+            "is_working": 1,
+            "voltage": 0.9,
+            "current": 0.35,
+            "power": 0.31
+        },
+        "500000000": {
+            "is_working": 1,
+            "voltage": 0.9,
+            "current": 0.38,
+            "power": 0.34
+        },
+        "600000000": {
+            "is_working": 1,
+            "voltage": 0.9,
+            "current": 0.41,
+            "power": 0.37
+        },
+        "700000000": {
+            "is_working": 1,
+            "voltage": 0.9,
+            "current": 0.45,
+            "power": 0.4
+        },
+        "800000000": {
+            "is_working": 1,
+            "voltage": 0.9,
+            "current": 0.37,
+            "power": 0.33
+        },
+        "900000000": {
+            "is_working": 1,
+            "voltage": 0.9,
+            "current": 0.39,
+            "power": 0.35
+        },
+        "1000000000": {
+            "is_working": 0,
+            "voltage": 0.9,
+            "current": 0.43,
+            "power": 0.39
+        },
+        "1100000000": {
+            "is_working": 0,
+            "voltage": 0.9,
+            "current": 0.43,
+            "power": 0.39
+        },
+        "1200000000": {
+            "is_working": 0,
+            "voltage": 0.9,
+            "current": 0.43,
+            "power": 0.39
+        }
+    },
+    "0.7": {
+        "100000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.21,
+            "power": 0.14
+        },
+        "200000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.21,
+            "power": 0.15
+        },
+        "300000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.2,
+            "power": 0.14
+        },
+        "400000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.2,
+            "power": 0.14
+        },
+        "500000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.2,
+            "power": 0.14
+        },
+        "600000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.2,
+            "power": 0.14
+        },
+        "700000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.2,
+            "power": 0.14
+        },
+        "800000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.2,
+            "power": 0.14
+        },
+        "900000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.21,
+            "power": 0.15
+        },
+        "1000000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.21,
+            "power": 0.15
+        },
+        "1100000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.21,
+            "power": 0.15
+        },
+        "1200000000": {
+            "is_working": 0,
+            "voltage": 0.7,
+            "current": 0.21,
+            "power": 0.15
+        }
+    },
+    "0.75": {
+        "100000000": {
+            "is_working": 1,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "200000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "300000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "400000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "500000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "600000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "700000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "800000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "900000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "1000000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "1100000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        },
+        "1200000000": {
+            "is_working": 0,
+            "voltage": 0.75,
+            "current": 0.22,
+            "power": 0.16
+        }
+    },
+    "0.85": {
+        "100000000": {
+            "is_working": 1,
+            "voltage": 0.85,
+            "current": 0.25,
+            "power": 0.21
+        },
+        "200000000": {
+            "is_working": 1,
+            "voltage": 0.85,
+            "current": 0.3,
+            "power": 0.26
+        },
+        "300000000": {
+            "is_working": 1,
+            "voltage": 0.85,
+            "current": 0.37,
+            "power": 0.31
+        },
+        "400000000": {
+            "is_working": 1,
+            "voltage": 0.85,
+            "current": 0.32,
+            "power": 0.27
+        },
+        "500000000": {
+            "is_working": 1,
+            "voltage": 0.85,
+            "current": 0.36,
+            "power": 0.31
+        },
+        "600000000": {
+            "is_working": 1,
+            "voltage": 0.85,
+            "current": 0.39,
+            "power": 0.33
+        },
+        "700000000": {
+            "is_working": 1,
+            "voltage": 0.85,
+            "current": 0.44,
+            "power": 0.37
+        },
+        "800000000": {
+            "is_working": 1,
+            "voltage": 0.85,
+            "current": 0.36,
+            "power": 0.3
+        },
+        "900000000": {
+            "is_working": 0,
+            "voltage": 0.85,
+            "current": 0.36,
+            "power": 0.31
+        },
+        "1000000000": {
+            "is_working": 0,
+            "voltage": 0.85,
+            "current": 0.37,
+            "power": 0.31
+        },
+        "1100000000": {
+            "is_working": 0,
+            "voltage": 0.85,
+            "current": 0.39,
+            "power": 0.33
+        },
+        "1200000000": {
+            "is_working": 0,
+            "voltage": 0.85,
+            "current": 0.41,
+            "power": 0.35
+        }
+    },
+    "0.95": {
+        "100000000": {
+            "is_working": 1,
+            "voltage": 0.95,
+            "current": 0.28,
+            "power": 0.27
+        },
+        "200000000": {
+            "is_working": 1,
+            "voltage": 0.95,
+            "current": 0.37,
+            "power": 0.34
+        },
+        "300000000": {
+            "is_working": 1,
+            "voltage": 0.95,
+            "current": 0.42,
+            "power": 0.4
+        },
+        "400000000": {
+            "is_working": 1,
+            "voltage": 0.95,
+            "current": 0.39,
+            "power": 0.37
+        },
+        "500000000": {
+            "is_working": 1,
+            "voltage": 0.95,
+            "current": 0.4,
+            "power": 0.38
+        },
+        "600000000": {
+            "is_working": 1,
+            "voltage": 0.95,
+            "current": 0.43,
+            "power": 0.41
+        },
+        "700000000": {
+            "is_working": 1,
+            "voltage": 0.95,
+            "current": 0.46,
+            "power": 0.45
+        },
+        "800000000": {
+            "is_working": 1,
+            "voltage": 0.95,
+            "current": 0.42,
+            "power": 0.4
+        },
+        "900000000": {
+            "is_working": 1,
+            "voltage": 0.95,
+            "current": 0.43,
+            "power": 0.41
+        },
+        "1000000000": {
+            "is_working": 1,
+            "voltage": 0.95,
+            "current": 0.45,
+            "power": 0.43
+        },
+        "1100000000": {
+            "is_working": 0,
+            "voltage": 0.95,
+            "current": 0.46,
+            "power": 0.45
+        },
+        "1200000000": {
+            "is_working": 0,
+            "voltage": 0.95,
+            "current": 0.5,
+            "power": 0.47
+        }
+    },
+    "1": {
+        "100000000": {
+            "is_working": 1,
+            "voltage": 1.0,
+            "current": 0.29,
+            "power": 0.29
+        },
+        "200000000": {
+            "is_working": 1,
+            "voltage": 1.0,
+            "current": 0.37,
+            "power": 0.36
+        },
+        "300000000": {
+            "is_working": 1,
+            "voltage": 1.0,
+            "current": 0.46,
+            "power": 0.46
+        },
+        "400000000": {
+            "is_working": 1,
+            "voltage": 1.0,
+            "current": 0.41,
+            "power": 0.41
+        },
+        "500000000": {
+            "is_working": 1,
+            "voltage": 1.0,
+            "current": 0.45,
+            "power": 0.45
+        },
+        "600000000": {
+            "is_working": 0,
+            "voltage": 1.0,
+            "current": 0.51,
+            "power": 0.51
+        },
+        "700000000": {
+            "is_working": 1,
+            "voltage": 1.0,
+            "current": 0.52,
+            "power": 0.52
+        },
+        "800000000": {
+            "is_working": 1,
+            "voltage": 1.0,
+            "current": 0.43,
+            "power": 0.43
+        },
+        "900000000": {
+            "is_working": 1,
+            "voltage": 1.0,
+            "current": 0.43,
+            "power": 0.43
+        },
+        "1000000000": {
+            "is_working": 1,
+            "voltage": 1.0,
+            "current": 0.44,
+            "power": 0.44
+        },
+        "1100000000": {
+            "is_working": 0,
+            "voltage": 1.0,
+            "current": 0.44,
+            "power": 0.44
+        },
+        "1200000000": {
+            "is_working": 0,
+            "voltage": 1.0,
+            "current": 0.46,
+            "power": 0.46
+        }
+    },
+    "1.5": {
+        "100000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.51,
+            "power": 0.76
+        },
+        "200000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.64,
+            "power": 0.96
+        },
+        "300000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.7,
+            "power": 1.05
+        },
+        "400000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.65,
+            "power": 0.97
+        },
+        "500000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.68,
+            "power": 1.02
+        },
+        "600000000": {
+            "is_working": 0,
+            "voltage": 1.5,
+            "current": 0.74,
+            "power": 1.11
+        },
+        "700000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.84,
+            "power": 1.26
+        },
+        "800000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.76,
+            "power": 1.14
+        },
+        "900000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.78,
+            "power": 1.17
+        },
+        "1000000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.82,
+            "power": 1.22
+        },
+        "1100000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.81,
+            "power": 1.22
+        },
+        "1200000000": {
+            "is_working": 1,
+            "voltage": 1.5,
+            "current": 0.89,
+            "power": 1.34
+        }
+    }
+}
