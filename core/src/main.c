@@ -15,6 +15,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "nn.h"
+#include "model.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -65,7 +68,36 @@ enum {
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int input_size = 57;
+int hidden_size = 8;
+int output_size = 18;
 
+const char *categories[] = {
+  "Arabic", "Chinese", "Czech", "Dutch", "English", "French", "German", 
+        "Greek", "Irish", "Italian", "Japanese", "Korean", "Polish", "Portuguese", 
+        "Russian", "Scottish", "Spanish", "Vietnamese"
+};
+
+
+int len_mapping = 57;
+char letter_mapping[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',' ','.',',',';','\''};
+
+
+void encodeOneHot(Matrix *input, char c) {
+  memset(input->data, 0, input->rows * input->cols * sizeof(float));
+  for (int i=0; i<len_mapping; i+=1) {
+    if (letter_mapping[i] == c) {
+      input->data[i] = 1;
+      return;
+    }
+  }
+}
+
+char *input_strs[] = {
+  "sakura",
+  "Vandroogenbroeck",
+  "Zhong-Wen",
+};
 /* USER CODE END 0 */
 
 /**
@@ -102,53 +134,52 @@ int main(int argc, char **argv) {
 
   uint8_t mhartid = READ_CSR("mhartid");
 
-  if (mhartid == 20) {
-    printf("hart 20 booting up others...\n");
-
-    HART_DATA->hart_0 = IDLE;
-    HART_DATA->hart_1 = IDLE;
-    HART_DATA->hart_2 = IDLE;
-    HART_DATA->hart_3 = IDLE;
-    
-    // boot 0-1
-    RCC->CLUSTER_CLKSEL = 0b000100100100100100100100100100101;
-    RCC->CLUSTER_RESETS = 0x000003FE;
-
-    // boot all
-    // RCC->CLUSTER_CLKSEL = 0b000101101101101101101101101101101;
-    // RCC->CLUSTER_RESETS = 0x00000000;
-  }
-  else {
-    while (1) {
-      printf("i shouldnt be here :((\n");
-    }
-  }
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1) {
-    if (HART_DATA->hart_0 == IDLE) {
-      HART_DATA->hart_0 = DISPATCHED;
-      printf("hart 0 is running\n");
-    }
-    if (HART_DATA->hart_0 == DONE) {
-      printf("hart 0 is done\n");
-      HART_DATA->hart_0 = IDLE;
-    }
-    if (HART_DATA->hart_1 == IDLE) {
-      HART_DATA->hart_1 = DISPATCHED;
-      printf("hart 1 is running\n");
-    }
-    if (HART_DATA->hart_1 == DONE) {
-      printf("hart 1 is done\n");
-      HART_DATA->hart_1 = IDLE;
-    }
-    printf("hart status: (%d, %d, %d, %d)\n", HART_DATA->hart_0, HART_DATA->hart_1, HART_DATA->hart_2, HART_DATA->hart_3);
-    counter += 1;
+    printf("================================\n");
+    printf("initializing matrix...\n");
+    Matrix output;
+    NN_initMatrix(&output, 1, output_size);
     
-    HAL_delay(200);
+    Matrix input;
+    NN_initMatrix(&input, 1, input_size + hidden_size);
+    
+    Matrix hidden;
+    NN_initMatrix(&hidden, 1, hidden_size);
+
+    int index;
+    for (int i=0; i<3; i+=1) {
+      char *str = input_strs[i];
+
+      memset(hidden.data, 0, hidden.rows * hidden.cols * sizeof(float));
+      
+      for (int j=1; j<strlen(str); j+=1) {
+        encodeOneHot(&input, str[j]);
+        NN_linear(&hidden, &i2h_weight_transposed, &i2h_bias, &input);
+
+        forward(&output, &hidden, &input);
+      }
+      
+      // printMatrix(&output);
+      index = argmax(&output);
+      
+      printf("entered: %s\n", str);
+      printf("predicted: (%d, %s), \tscore: ", index, categories[index]);
+      printDouble(output.data[index], 2);
+      printf("\n");
+      printf("\n");
+    }
+        
+        
+    NN_deinitMatrix(&output);
+    NN_deinitMatrix(&input);
+    NN_deinitMatrix(&hidden);
+
+    HAL_delay(1000);
     /* USER CODE END WHILE */
   }
   /* USER CODE BEGIN 3 */

@@ -123,6 +123,8 @@ CFLAGS += $(SPECFLAGS)
 CFLAGS += $(ARCHFLAGS)
 CFLAGS += $(INCLUDES)
 
+CFLAGS_TAIL = "-lm"
+
 # linker Flags
 LFLAGS  = -static
 LFLAGS += -nostartfiles
@@ -155,18 +157,18 @@ $(TARGET_VERILOG): $(TARGET_ELF)
 
 $(TARGET_ELF): $(OBJECTS)
 	@echo "[LD] linking $@"
-	@$(CC) $(CFLAGS) $(LFLAGS) $^ -o $@
+	@$(CC) $(CFLAGS) $(LFLAGS) $^ -o $@ $(CFLAGS_TAIL)
 	$(SIZE) $(TARGET_ELF)
 
 $(A_OBJECTS): $(BUILD_DIR)%.o: %.S
 	@echo "[CC] compiling $@"
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ $(CFLAGS_TAIL)
 
 $(C_OBJECTS): $(BUILD_DIR)%.o: %.c
 	@echo "[CC] compiling $@"
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ $(CFLAGS_TAIL)
 
 
 #################################
