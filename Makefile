@@ -53,19 +53,18 @@ C_SOURCES  = $(wildcard $(SRC_DIR)*.c) $(wildcard $(SRC_DIR)*/*.c)
 
 # BSP sources
 INCLUDES  += -I$(BSP_DIR)$(CHIP)/inc
-# A_SOURCES += $(BSP_DIR)$(CHIP)/startup/$(CHIP)_bootrom.S
-A_SOURCES += $(BSP_DIR)$(CHIP)/startup/$(CHIP)_startup.S
+INCLUDES  += -I$(BSP_DIR)common/inc
+# A_SOURCES += $(BSP_DIR)$(CHIP)/startup/bootrom.S
+A_SOURCES += $(BSP_DIR)$(CHIP)/startup/startup.S
 
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/$(CHIP)_hal.c
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/$(CHIP)_hal_system.c
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/$(CHIP)_hal_core.c
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/$(CHIP)_hal_clint.c
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/$(CHIP)_hal_plic.c
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/$(CHIP)_hal_gpio.c
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/$(CHIP)_hal_i2c.c
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/$(CHIP)_hal_rcc.c
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/$(CHIP)_hal_spi.c
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/$(CHIP)_hal_uart.c
+C_SOURCES += $(BSP_DIR)common/src/hal_clint.c
+C_SOURCES += $(BSP_DIR)common/src/hal_core.c
+C_SOURCES += $(BSP_DIR)common/src/hal_gpio.c
+C_SOURCES += $(BSP_DIR)common/src/hal_i2c.c
+C_SOURCES += $(BSP_DIR)common/src/hal_plic.c
+C_SOURCES += $(BSP_DIR)common/src/hal_spi.c
+C_SOURCES += $(BSP_DIR)common/src/hal_uart.c
+C_SOURCES += $(BSP_DIR)$(CHIP)/src/hal_rcc.c
 
 # LIB sources
 INCLUDES  += $(foreach LIBRARY_NAME,$(LIBRARIES),-I$(LIB_DIR)$(LIBRARY_NAME)/inc)
@@ -98,14 +97,14 @@ TARGET_VERILOG = $(BUILD_DIR)$(TARGET).out
 #################################
 
 # MCU Settings
-ARCH = rv64imafdc
-ABI = lp64d
-CODEMODEL = medany
+ARCH ?= rv64imafdc
+ABI ?= lp64d
+CODEMODEL ?= medany
 
 ifeq ($(USE_HTIF), 1)
-LD_SCRIPT = $(BSP_DIR)$(CHIP)/$(CHIP)_htif.ld
+LD_SCRIPT ?= $(BSP_DIR)$(CHIP)/$(CHIP)_htif.ld
 else
-LD_SCRIPT = $(BSP_DIR)$(CHIP)/$(CHIP).ld
+LD_SCRIPT ?= $(BSP_DIR)$(CHIP)/$(CHIP).ld
 endif
 
 # -mcmodel=medany -Wl,--start-group -lc_nano -lgloss_htif -Wl,--end-group -lgcc -static -nostartfiles -dT htif.ld
@@ -117,7 +116,7 @@ ARCHFLAGS = -march=$(ARCH) -mabi=$(ABI) -mcmodel=$(CODEMODEL) -fno-pie
 # compiler Flags
 CFLAGS  = -g -std=gnu11 -O0
 CFLAGS += -fno-common -fno-builtin-printf
-CFLAGS += -Wall -Wextra -Warray-bounds -Wno-unused-parameter
+CFLAGS += -Wall -Wextra -Warray-bounds -Wno-unused-parameter -Wcast-qual
 # CFLAGS += -Wl,--start-group -lc_nano -lgloss_htif -Wl,--end-group -lgcc
 CFLAGS += $(SPECFLAGS)
 CFLAGS += $(ARCHFLAGS)
