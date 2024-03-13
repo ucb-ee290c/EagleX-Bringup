@@ -11,6 +11,7 @@
         "bearlyml_hal.h": "c",
         "rv_common.h": "c",
         "rv_arch.h": "c",
-        "eaglex_hal.h": "c"
+        "eaglex_hal.h": "c",
+        "hal_clint.h": "c"
     }
 }

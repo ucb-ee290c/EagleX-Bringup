@@ -168,7 +168,7 @@ unsigned long read_cycles() {
 #define RELU6 2
 
 #define ROCC_INSTRUCTION_RS1_RS2(x, rs1, rs2, funct) \
-  ROCC_INSTRUCTION_0_R_R(x, rs1, rs2, funct, 10, 11)
+  ROCC_INSTRUCTION_0_R_R(x, rs1, rs2, funct)
 
 #define to_deps(push1, pop1, push2, pop2) \
   (((push1 << 3) | (pop1 << 2) | (push2 << 1) | pop2) << 3)

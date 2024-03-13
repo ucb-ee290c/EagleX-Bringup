@@ -64,7 +64,7 @@ C_SOURCES += $(BSP_DIR)common/src/hal_i2c.c
 C_SOURCES += $(BSP_DIR)common/src/hal_plic.c
 C_SOURCES += $(BSP_DIR)common/src/hal_spi.c
 C_SOURCES += $(BSP_DIR)common/src/hal_uart.c
-C_SOURCES += $(BSP_DIR)$(CHIP)/src/hal_rcc.c
+
 
 # LIB sources
 INCLUDES  += $(foreach LIBRARY_NAME,$(LIBRARIES),-I$(LIB_DIR)$(LIBRARY_NAME)/inc)

@@ -90,7 +90,7 @@ void operands(int c, int * a, int * b, int * d) {
 //#error scratchpad or accumulator not big enough
 #endif
 
-#define PRINT_LOG 0
+#define PRINT_LOG 1
 
 
 /**
