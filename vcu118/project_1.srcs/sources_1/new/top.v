@@ -29,6 +29,9 @@ module top(
   input  CLK_125MHZ_N,
   
   /* FPGA IO signals */
+  // pllclk_out
+  input  FMC_HPC1_CLK0_M2C_P,
+
   input  GPIO_SW_C,
   output GPIO_LED0,
   output GPIO_LED1,
@@ -41,14 +44,14 @@ module top(
   input  GPIO_DIP_SW4,
   
   
-  // TCK
-  input  PMOD0_2_LS,
-  // TDI
-  input  PMOD0_4_LS,
-  // TDO
-  output PMOD0_0_LS,
-  // TMS
-  input  PMOD0_5_LS,
+  output PMOD0_0_LS,    // TDO
+//  output PMOD0_1_LS,    // 
+  input  PMOD0_2_LS,    // TCK
+  output PMOD0_3_LS,    // UART TXD
+  input  PMOD0_4_LS,    // TDI
+  input  PMOD0_5_LS,    // TMS
+//  input  PMOD0_6_LS,    // 
+//  input  PMOD0_7_LS,    // UART RXD
   
   output PMOD1_0_LS,
   output PMOD1_1_LS,
@@ -74,7 +77,7 @@ module top(
   // TMS
   output FMC_HPC1_LA08_P,  
   // GPIO0
-  input  FMC_HPC1_HA05_N,
+  input  FMC_HPC1_LA05_N,
   // UART RX
   output FMC_HPC1_LA10_P,
   // UART TX
@@ -82,28 +85,27 @@ module top(
 );
 
   /* FPGA clocking, 125MHz */
-  wire clk;
-  IBUFGDS bufgd_inst(.I(CLK_125MHZ_P), .IB(CLK_125MHZ_N), .O(clk));
+//  wire clk;
+//  IBUFGDS bufgd_inst(.I(CLK_125MHZ_P), .IB(CLK_125MHZ_N), .O(clk));
 
-//  wire clk_100;
-//  wire clk_50;
-//  wire clk_20;
-//  wire clk_10;
-//  wire clk_1;
+  wire clk_200;
+  wire clk_100;
+  wire clk_50;
+  wire clk_10;
   
-//  clk_wiz_0 clk_wiz_0(
-//    // Clock out ports
-//    .clk_out1(clk_100),
-//    .clk_out2(clk_50),
-//    .clk_out3(clk_20),
-//    .clk_out4(clk_10),
-//    // Status and control signals
-//    .resetn(~CPU_RESET),
-//    .locked(),
-//    // Clock in ports
-//    .clk_in1_p(CLK_125MHZ_P),
-//    .clk_in1_n(CLK_125MHZ_N)
-//  );
+  clk_wiz_0 clk_wiz_0(
+    // Clock out ports
+    .clk_out1(clk_200),
+    .clk_out2(clk_100),
+    .clk_out3(clk_50),
+    .clk_out4(clk_10),
+    // Status and control signals
+    .resetn(~CPU_RESET),
+    .locked(),
+    // Clock in ports
+    .clk_in1_p(CLK_125MHZ_P),
+    .clk_in1_n(CLK_125MHZ_N)
+  );
   
   
   /* FPGA IO signals */
@@ -112,13 +114,13 @@ module top(
   assign GPIO_LED2 = 1'b0;
   assign GPIO_LED7 = 1'b0;
   
-  assign PMOD1_0_LS = counter < (`SYSCLK_DIV / 2);
+  // assign PMOD1_0_LS = counter < (`SYSCLK_DIV / 2);
   assign PMOD1_2_LS = 'b0;
   assign PMOD1_3_LS = 'b0;
   
   /* DUT clock generation */
   reg [31:0] counter;
-  always @(posedge clk) begin
+  always @(posedge clk_10) begin
     if (counter == `SYSCLK_DIV)
         counter <= 'd0;
     else
@@ -130,7 +132,7 @@ module top(
   assign FMC_HPC1_LA06_N = ~GPIO_SW_C;
   
   // CCLK
-  assign FMC_HPC1_LA04_P = counter < (`SYSCLK_DIV / 2);
+  assign FMC_HPC1_LA04_P = clk_100;
   
   // JTAG
   // TCK
@@ -144,10 +146,13 @@ module top(
   
   // GPIO
   // GPIO0 
-  assign PMOD1_1_LS = FMC_HPC1_HA05_N;
+  assign PMOD1_1_LS = FMC_HPC1_LA05_N;
   
   // UART
   assign FMC_HPC1_LA10_P = 'b1;
+  assign PMOD0_3_LS = FMC_HPC1_LA10_N;
   assign PMOD1_4_LS = FMC_HPC1_LA10_N;
+
+  assign PMOD1_0_LS = FMC_HPC1_CLK0_M2C_P;
   
 endmodule
